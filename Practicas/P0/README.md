@@ -160,6 +160,9 @@ diferentes de las utilizadas en el primer programa (aunque no están prohibidas 
 
 ---
 
-11. Redacte un informe detallado con sus resultados y conclusiones.
+11. Redacte un informe detallado con sus resultados y conclusiones. \
+
+Como computólogos hemos compilado programas ya por muchos semestres sin embargo realmente nunca había pensado a profundidad acerca de todo lo que implica este proceso. \
+Para esta práctica emulamos todo esto proceso paso a paso para hacernos una idea qué pasa durante este proceso.
 
 [^1]: Pueden consultar la lista de directivas en su documentación en línea: [CPP - Index of directives](https://gcc.gnu.org/onlinedocs/cpp/Index-of-Directives.html##Index-of-Directives). O bien, revisar la entrada para este preprocesador en la herramienta man en Linux: `$ man cpp`
