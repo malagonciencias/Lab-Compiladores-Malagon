@@ -30,8 +30,7 @@ end
 ### Desarrollo:
 
 1. Deberá tener instalado el compilador _gcc_ y trabajar en un ámbiente _Linux_.
-2. Escriba el siguiente programa en lenguaje **_C_** (sin copiar y pegar) y nómbrelo _programa.c_
-
+2. Escriba el siguiente programa en lenguaje **_C_** (sin copiar y pegar) y nómbrelo *programa.c*
 ```c
 #include <stdio .h>
 #include <stdlib.h>
