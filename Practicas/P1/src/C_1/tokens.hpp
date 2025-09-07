@@ -6,6 +6,7 @@
 
 using namespace std;
 
+// Se definen los tipos de tokens dentro del namespace C_1
 namespace C_1
 {    
     const int MAS = 1;

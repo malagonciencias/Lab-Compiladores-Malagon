@@ -115,17 +115,31 @@ d. Compilar mediante: ```g++ lex.yy.cc -o nombreEjecutable``` <br>
 e. Ejecutar mediante: ```./nombreEjecutable```
 
 #### Ejercicios 
-1. ¿Qué ocurre si en la primera sección se quitan las llaves al nombre de la macro letra? (0.5 pts)
-2. ¿Qué ocurre si en la segunda sección se quitan las llaves a las macros? (0.5 pts)
-3. ¿Cómo se escribe un comentario en flex? (0.5 pts)
-4. ¿Qué se guarda en yytext? (0.5 pts)
-5. ¿Qué pasa al ejecutar el programa e introducir cadenas de caracteres y de dígitos por la consola? (0.5 pts)
-6. ¿Qué ocurre si introducimos caracteres como "\*" en la consola? (0.5 pts)
+1. ¿Qué ocurre si en la primera sección se quitan las llaves al nombre de la macro letra? (0.5 pts) \
+  Realize dos ejecuciones con los comandos ``echo "hola mundo" | ./primer_flex``. \
+  Para la ejecución que tenía las llaves alrededor de las letras se identificaron las palabras correctamente y para la ejecución que no las tenia simplemente se imprimió en terminal "hola mundo".
+  Después probé con ``echo "a-zA-Z" | ./primer_flex`` y se identificaron las palabras correctamente, al quitar los corchetes se toma como literal la segunda parte y no como una expresion regular.
+2. ¿Qué ocurre si en la segunda sección se quitan las llaves a las macros? (0.5 pts) \
+  Ninguna de las estructuras parece ser reconocida adecuadamente cuando si lo eran antes, aparte no podemos quitar todas las llaves debido a que la regla de espacio es vacía.
+3. ¿Cómo se escribe un comentario en flex? (0.5 pts) \
+  Los comentarios funcionan como lo hacen en C, se utiliza ``//`` para comentarios de una línea y ``/* Comentario */`` para comentarios multilínea.
+4. ¿Qué se guarda en yytext? (0.5 pts) \
+  yytext es una apuntador a un caracter (o sea una cadena) donde se guarda el texto que coincidió con la regla.
+5. ¿Qué pasa al ejecutar el programa e introducir cadenas de caracteres y de dígitos por la consola? (0.5 pts) \
+  Como se ha visto anteriormente se realiza la identificación adecuadamente.
+6. ¿Qué ocurre si introducimos caracteres como "\*" en la consola? (0.5 pts) \
+  ``
+  \*Encontré una palabra: hola 
+  Encontré una palabra: mundo
+  ``
+  Como podemos ver no son identificadas y parecen pasar directamente por el programa.
 7. Modificar al código anterior en un archivo nuevo, de tal manera que reconozca lo siguiente: (2 pts)
     1. La expresión regular para los hexadecimales en lenguaje C++.
     2. 5 palabras reservadas del lenguaje C++.
     3. Los identificadores válidos del lenguaje C++, con longitud máxima de 32 caracteres (**Sugerencia**: use el operador {m,n}).
     4. Los espacios en blanco.
+
+    Implementado en en ``primer_flex_modificado.flex``
 
 ---
 
@@ -194,15 +208,18 @@ $ ./compiler prueba
 #### Ejercicios
 
 8. Describir el conjunto de terminales y la expresión regular que reconoce a cada uno  en _lexer.ll_. (2 pts)
-9. Generar acciones léxicas para cada terminal de nuestro lenguaje en _Lexer.cpp_, de modo que se muestre en pantalla la slida esperada con el archivo _prueba_. (2 pts)
-10. Crear un _Makefile_. (1 pt)
+9. Generar acciones léxicas para cada terminal de nuestro lenguaje en _Lexer.cpp_, de modo que se muestre en pantalla la slida esperada con el archivo _prueba_. (2 pts) \
+Cambios incluidos en el __lexer.ll__
+10. Crear un _Makefile_. (1 pt) \
+Incluido en la carpeta __C_1__
 
 ---
 #### Extras
 
 11. Incluir lo necesario para producir la misma salida que en la práctica 1 (2 pts.)
 12. Documentar el código. (0.25pts)
-13. Proponer 4 archivos de prueba nuevos, 2 válidos y 2 inválidos. (0.25pts)
+13. Proponer 4 archivos de prueba nuevos, 2 válidos y 2 inválidos. (0.25pts) \
+Incluidos en __prueba_valida1, prueba_valida2, prueba_invalida1, prueba_invalida2__
 
 
 
