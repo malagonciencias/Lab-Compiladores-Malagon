@@ -194,15 +194,14 @@ $ ./compiler prueba
 #### Ejercicios
 
 8. Describir el conjunto de terminales y la expresión regular que reconoce a cada uno  en _lexer.ll_. (2 pts)
-9. Generar acciones léxicas para cada terminal de nuestro lenguaje en _Lexer.cpp_, de modo que se muestre en pantalla la slida esperada con el archivo _prueba_. (2 pts)
+9. Generar acciones léxicas para cada terminal de nuestro lenguaje en _Lexer.cpp_, de modo que se muestre en pantalla la salida esperada con el archivo _prueba_. (2 pts)
 10. Crear un _Makefile_. (1 pt)
 
 ---
 #### Extras
 
-11. Incluir lo necesario para producir la misma salida que en la práctica 1 (2 pts.)
-12. Documentar el código. (0.25pts)
-13. Proponer 4 archivos de prueba nuevos, 2 válidos y 2 inválidos. (0.25pts)
+11. Documentar el código. (0.25pts)
+12. Proponer 4 archivos de prueba nuevos, 2 válidos y 2 inválidos. (0.25pts)
 
 
 
