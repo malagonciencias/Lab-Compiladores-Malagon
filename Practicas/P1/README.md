@@ -216,9 +216,8 @@ Incluido en la carpeta __C_1__
 ---
 #### Extras
 
-11. Incluir lo necesario para producir la misma salida que en la práctica 1 (2 pts.)
-12. Documentar el código. (0.25pts)
-13. Proponer 4 archivos de prueba nuevos, 2 válidos y 2 inválidos. (0.25pts) \
+11. Documentar el código. (0.25pts)
+12. Proponer 4 archivos de prueba nuevos, 2 válidos y 2 inválidos. (0.25pts) \
 Incluidos en __prueba_valida1, prueba_valida2, prueba_invalida1, prueba_invalida2__
 
 
