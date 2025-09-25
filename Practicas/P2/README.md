@@ -24,13 +24,14 @@ p3
 
 ```bash
 $ cd src/
-$ make
+$ flex++ lexer.ll
+$ g++ Lexer.cpp Parser.cpp main.cpp -o analyzer
 ```
 
 #### Ejecución
 
 ```bash
-$ ./compiler prueba
+$ ./analyzer prueba
 ```
 
 #### Ejercicios
