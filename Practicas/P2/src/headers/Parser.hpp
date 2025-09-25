@@ -1,8 +1,8 @@
 #ifndef PARSER_H
 #define PARSER_H
 #include <string>
-#include "headers/Lexer.hpp"
-#include "headers/Symbols.hpp"
+#include "Lexer.hpp"
+#include "Symbols.hpp"
 using namespace std;
 
 namespace C_1
