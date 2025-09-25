@@ -3,8 +3,8 @@
 #include <string>
 using namespace std;
 
-#include "Symbols.hpp"
-#include "Lexer.hpp"
+#include "headers/Symbols.hpp"
+#include "headers/Lexer.hpp"
 
 int line=1;
 %}

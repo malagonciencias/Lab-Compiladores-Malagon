@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "Lexer.hpp"
-#include "Parser.hpp"
+#include "headers/Lexer.hpp"
+#include "headers/Parser.hpp"
 
 using namespace std;
 using namespace C_1;
