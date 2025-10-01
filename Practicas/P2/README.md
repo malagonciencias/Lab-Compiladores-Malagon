@@ -54,13 +54,12 @@ Para la gramática G = ( N, Σ, P, S), descrita por las siguientes producciones:
 3. Mostrar en el archivo el proceso de eliminación de la recursividad izquierda o justificar, en caso de no ser necesario. (1 pts.)
 4. Mostrar en el archivo el proceso de factorización izquierda o justificar, en caso de no ser necesario. (1 pts.)
 5. Mostrar en el archivo los nuevos conjuntos _N_ y _P_. (0.5 pts.)
-6. Sustituir el contenido del Analizador Léxico (Lexer.cpp) con el implementado en la primera práctica. (0.5 pts.)
+6. Definir el Analizador Léxico (lexer.ll) con las acciones léxicas correspondientes. (2 pts.)
 7. Implementar el Analizador Sintáctico (Parser.cpp) de descenso recursivo, documentando las funciones de cada No-Terminal, de forma que el programa descrito en el archivo _prueba_ sea reconocido y aceptado por el analizador resultante. (4 pts.)
-8. Proveer una segunda versión del programa en una carpeta adicional de nombre _ejercicio8_, en la que sustituyan el analizador léxico escrito en C++ con el implementado en la práctica 2. También debe reconocer y aceptar el programa descrito en _prueba_. (2 pt.)
 
 ---
 #### Extras
 
-9. Documentar el código. (0.25pts)
-10. Proponer 4 archivos de prueba nuevos, 2 válidos y 2 inválidos. (0.25pts)
-11. Modificar el Makefile para poder simplificar el proceso de compilación de la práctica. (1pt)
+8. Documentar el código. (0.25pts)
+9. Proponer 4 archivos de prueba nuevos, 2 válidos y 2 inválidos. (0.25pts)
+10. Modificar el Makefile para poder simplificar el proceso de compilación de la práctica. (1pt)
