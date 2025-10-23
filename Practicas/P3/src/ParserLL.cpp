@@ -241,11 +241,28 @@ void ParserLL::loadTable()
 
 }
 
+// int ParserLL::parse() {
+//   // Token token = (Token) lexer->yylex();
+//   Token token = eat();
+//     while(token != 0) {
+//         cout << token << endl;
+//         token = eat();
+//     }
+//     return 0;
+// }
+
 int ParserLL::parse()
 {
   /**************************************************
    ** 7. Implementar el algoritmo de AS predictivo **
    **************************************************/
+
+  // Declaramos los nombres de tokens y no terminales solo para mas legibilidad
+  string tokensNames[] = {"$", "+", "-", "*", "/", "=", "(", ")", ",", ";", "ID", "if", "int", 
+    "while", "else", "float", "numero"};
+  string noTermsNames[] = {"ε", "programa", "declaraciones", "declaraciones'", "declaracion", "tipo", 
+    "lista_var", "lista_var'", "sentencias", "sentencias'", "sentencia", "expresion", "expresionS'", 
+    "expresionA", "expresionA'", "expresionB", "expresionB'", "expresionC", "expresionC'", "expresionD"};
 
   //Auxiliares
   stack<Symbol> pila;    
@@ -258,43 +275,57 @@ int ParserLL::parse()
 
   // Añadimos el fin de archivo a la pila
   pila.push(Symbol(t_eof));
+  cout << "Se metió '" << tokensNames[t_eof] << "' a la pila" << endl;
   pila.push(Symbol(programa)); // Metemos la produccion inicial de la gramatica
+  cout << "Se metió '" << noTermsNames[programa] << "' a la pila" << endl;
   token = eat(); // Comemos un token antes de empezar
+  cout << "Se leyó '" << tokensNames[token] << "' como el primer token " << endl;
   // Realmente no hace mucha diferencia si iteramos así o mientras el token no sea eof
   while(!pila.empty()) {
     X = pila.top();
+    if(X.getType() == terminal)
+      cout << "Se encontró '" << tokensNames[X.getToken()] << "' en el tope de la pila" << endl;
+    else 
+      cout << "Se encontró '" << noTermsNames[X.getNoTerm()] << "' en el tope de la pila" << endl;
     if(X.getType() == terminal){ // el token es terminal
       if(X.getToken() == token){ // si X == p
+        cout << "Se quitó el token '" << tokensNames[X.getToken()] << "' de la pila" << endl;
         pila.pop(); // Quitamos uno de la pila
         token = eat(); // Avanzamos al siguiente token
+        cout << "Se comió el token '" << tokensNames[token] << "' del archivo" << endl;
       }else {
-        error("Se esperaba el token " + std::to_string(token)); 
+        error("Se esperaba el token '" + tokensNames[X.getToken()] + "'"); 
         return -1;
       }
     } else { // Para los no terminales
       // Verificamos en la tabla de analisis sintactico
       // Iteramos sobre la fila de la tabla con la el encabeza X
       auto itFila = table.find(X.getNoTerm());
+      cout << "Se buscará el no terminal '" << noTermsNames[X.getNoTerm()] << "' en la tabla" << endl;
       if(itFila != table.end()) {
         // Buscamos las columnas hasta encontrar el token actual
         auto itColum = itFila->second.find(token);
+        cout << "Se buscará el token '" << tokensNames[token] << "' en la fila de " << noTermsNames[X.getNoTerm()] << endl;
         if(itColum != itFila->second.end()) { // Encontramos la produccion en la tabla
           int numeroProduccion = itColum->second;
           pila.pop();
+          cout << "Se quitó la producción '" << noTermsNames[X.getNoTerm()] << "' de la pila" << endl;
           Production prod = grammar.getProd(numeroProduccion); // obtenemos el numero de produccion que definimos
           vector<int> cuerpoProd = prod.getBody();
           // Iteramos de manera reversa sobre la produccion
           for(auto revIt = cuerpoProd.rbegin(); revIt != cuerpoProd.rend(); revIt++){
             Symbol prodSym = grammar.getSym(*revIt);
-            if(!(prodSym.getType() == terminal && prodSym.getNoTerm() == strEmpty)) // Ignoramos producciones epsilon
+            if(!(prodSym.getType() == terminal && prodSym.getNoTerm() == strEmpty)){ // Ignoramos producciones epsilon
               pila.push(prodSym);
+              cout << "Se metió la producción '" << noTermsNames[prodSym.getNoTerm()] << "' a la pila" << endl;
+            }
           }
         } else { // No se encontró el terminal en la fila
-          error("El token '" + std::to_string(token) + "' no está considerado en esta producción, o quizá en ninguna");
+          error("El token '" + tokensNames[token] + "' no está considerado en la fila de '" + noTermsNames[X.getNoTerm()] + "'");
           return -1;
         }
       } else { // No se encontró en la columna de no terminales
-        error("El no terminal '" + std::to_string((X.getNoTerm())) + "' no está considerado en la grámatica");
+        error("El no terminal '" + noTermsNames[X.getNoTerm()] + "' no está considerado en la grámatica");
         return -1;
       }
       

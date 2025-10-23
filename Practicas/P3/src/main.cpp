@@ -17,6 +17,13 @@ int main(int argc, char *argv[]){
     istream in(&fb);
     Lexer lexer(&in);
     ParserLL parser(&lexer);
+
+    // int token = lexer.yylex();
+    // while(token != 0) {
+    //     cout << token << ", " << lexer.YYText() << endl;
+    //     token = lexer.yylex();
+    // }
+
     parser.parse();
     fb.close();
     return 0;

@@ -9,13 +9,12 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceRoot}/src/compiler",
-            "args": ["prueba"],
+            "args": ["./src/prueba"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
-            "preLaunchTask": "C/C++: clang++ build active file",
             "miDebuggerPath": "/usr/bin/gdb"
         }
     ]
