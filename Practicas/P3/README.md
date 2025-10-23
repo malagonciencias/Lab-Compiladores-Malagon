@@ -179,15 +179,27 @@ Para la gramática G = ( N, Σ, P, S), descrita por las siguientes producciones:
 Se añade el link con la tabla original: \
 https://docs.google.com/spreadsheets/d/1nMl47ksHnaZ1Wb0klJRuiC9Hjo5lz1ePOEkrB6EU3Eo/edit?usp=sharing
 5. Sustituir el contenido del Analizador Léxico (lexer.ll) con el implementado en la segunda práctica. (0.5 pts.)
-6. Definir en un comentario de _Symbols.hpp_ la gramática _G'_. (0.05 pts.)
-7. Definir _Σ_ en un _**enum**_ de _Symbols.hpp_. (0.10 pts.)
-8. Definir _N'_ en un _**enum**_ de _Symbols.hpp_. (0.10 pts.)
-9. Cargar _N' ∪ Σ_ en _ParserLL.cpp_. (0.25 pts.) 
-10. Cargar _P'_ en _ParserLL.cpp_. (0.25 pts.)
-11. Cargar la tabla de análisis sintáctico predictivo en _ParserLL.cpp_. (0.25 pts.)
-12. Implementar el algoritmo de análisis sintáctico de descenso predictivo en _ParserLL.cpp_ de modo que el programa acepte el archivo _prueba_. (4 pts.)
+6. Definir en un comentario de _Symbols.hpp_ la gramática _G'_. (0.05 pts.) \
+Hecho
+7. Definir _Σ_ en un _**enum**_ de _Symbols.hpp_. (0.10 pts.) \
+Hecho 
+8. Definir _N'_ en un _**enum**_ de _Symbols.hpp_. (0.10 pts.) \ 
+\ Hecho
+9. Cargar _N' ∪ Σ_ en _ParserLL.cpp_. (0.25 pts.) \ 
+Hecho
+10. Cargar _P'_ en _ParserLL.cpp_. (0.25 pts.) \ 
+Hecho
+11. Cargar la tabla de análisis sintáctico predictivo en _ParserLL.cpp_. (0.25 pts.) \ 
+Hecho
+12. Implementar el algoritmo de análisis sintáctico de descenso predictivo en _ParserLL.cpp_ de modo que el programa acepte el archivo _prueba_. (4 pts.)  
+Hecho, probar con `make` y después haciendo `./compiler <archivo>`, los archivos que generé para prueba son _prueba2-5_, aparte del que ya se había dado.
+La implementación es más o menos como creo que querías que la hicieramos pero cambié los vectores a _Symbols_ ya que parecía que no se podía convertir el int al símbolo correcto, o sea a veces se convertía un no terminal a un terminal. También nunca utilicé la variable accion no sé para que era :P
 ---
 #### Extras
 
-13. Documentar el código. (0.25pts)
-14. Proponer 4 archivos de prueba nuevos, 2 válidos y 2 inválidos. (0.25pts)
+13. Documentar el código. (0.25pts) \
+    Según yo ya :3
+14. Proponer 4 archivos de prueba nuevos, 2 válidos y 2 inválidos. (0.25pts) \
+
+    - Archivos válidos: *prueba2*, *prueba3*
+    - Archivos inválidos: *prueba4*, *prueba5*

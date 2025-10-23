@@ -1,0 +1,7 @@
+int suma = 0;
+int diez = 10;
+
+while(diez >= 0){
+    suma++;
+    diez--;
+}

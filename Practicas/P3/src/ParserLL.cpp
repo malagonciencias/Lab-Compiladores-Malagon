@@ -71,81 +71,81 @@ void ParserLL::loadProds()
    ************************************************/  
     
   //  programa → declaraciones sentencias
-  grammar.addProd(1, Production(programa, {declaraciones, sentencias}));
+  grammar.addProd(1, Production(Symbol(programa), {Symbol(declaraciones), Symbol(sentencias)}));
 
   //  declaraciones → declaracion declaraciones'
-  grammar.addProd(2, Production(declaraciones, {declaracion, declaraciones_}));
+  grammar.addProd(2, Production(Symbol(declaraciones), {Symbol(declaracion), Symbol(declaraciones_)}));
 
   //  declaraciones → declaracion declaraciones'
-  grammar.addProd(3, Production(declaraciones_, {declaracion, declaraciones_}));
+  grammar.addProd(3, Production(Symbol(declaraciones_), {Symbol(declaracion), Symbol(declaraciones_)}));
   //  Produccion epsilon
-  grammar.addProd(4, Production(declaraciones_, {strEmpty}));
+  grammar.addProd(4, Production(Symbol(declaraciones_), {Symbol(strEmpty)}));
 
   //  declaracion → tipo lista_var 
-  grammar.addProd(5, Production(declaracion, {tipo, lista_var}));
+  grammar.addProd(5, Production(Symbol(declaracion), {Symbol(tipo), Symbol(lista_var), Symbol(t_pyc)}));
 
   //  tipo → int | float
-  grammar.addProd(6, Production(tipo, {t_int}));
-  grammar.addProd(7, Production(tipo, {t_float}));
+  grammar.addProd(6, Production(Symbol(tipo), {Symbol(t_int)}));
+  grammar.addProd(7, Production(Symbol(tipo), {Symbol(t_float)}));
 
   //  lista_var → identificador lista_var'
-  grammar.addProd(8, Production(lista_var, {t_id, lista_var_}));
+  grammar.addProd(8, Production(Symbol(lista_var), {Symbol(t_id), Symbol(lista_var_)}));
 
   //  lista_var' → "," identificador lista_var' ∣ ϵ
-  grammar.addProd(9, Production(lista_var_, {t_coma, t_id, lista_var_}));
+  grammar.addProd(9, Production(Symbol(lista_var_), {Symbol(t_coma), Symbol(t_id), Symbol(lista_var_)}));
   //  Produccion epsilon
-  grammar.addProd(10, Production(lista_var_, {strEmpty}));
+  grammar.addProd(10, Production(Symbol(lista_var_), {Symbol(strEmpty)}));
 
   //  sentencias → sentencia sentencias'
-  grammar.addProd(11, Production(sentencias, {sentencia, sentencias_}));
+  grammar.addProd(11, Production(Symbol(sentencias), {Symbol(sentencia), Symbol(sentencias_)}));
 
   //  sentencias' → sentencia sentencias' ∣ ϵ
-  grammar.addProd(12, Production(sentencias_, {sentencia, sentencias_}));
+  grammar.addProd(12, Production(Symbol(sentencias_), {Symbol(sentencia), Symbol(sentencias_)}));
   //  Produccion epsilon
-  grammar.addProd(13, Production(sentencias_, {strEmpty}));
+  grammar.addProd(13, Production(Symbol(sentencias_), {Symbol(strEmpty)}));
 
   //  sentencia → identificador = expresionS ; ∣ if ( expresionS ) sentencias else sentencias ∣ while ( expresionS ) sentencias
    
-  grammar.addProd(14, Production(sentencia, {t_id, t_asig, expresionS}));
-  grammar.addProd(15, Production(sentencia, {t_if, t_lpar, expresionS, t_rpar, sentencias, t_if, sentencias}));
-  grammar.addProd(16, Production(sentencia, {t_while, t_lpar, expresionS, t_rpar, sentencias}));
+  grammar.addProd(14, Production(Symbol(sentencia), {Symbol(t_id), Symbol(t_asig), Symbol(expresionS), Symbol(t_pyc)}));
+  grammar.addProd(15, Production(Symbol(sentencia), {Symbol(t_if), Symbol(t_lpar), Symbol(expresionS), Symbol(t_rpar), Symbol(sentencias), Symbol(t_else), Symbol(sentencias)}));
+  grammar.addProd(16, Production(Symbol(sentencia), {Symbol(t_while), Symbol(t_lpar), Symbol(expresionS), Symbol(t_rpar), Symbol(sentencias)}));
 
   //  expresionS → expresionA expresionS'
-  grammar.addProd(17, Production(expresionS, {expresionA, expresionS_}));
+  grammar.addProd(17, Production(Symbol(expresionS), {Symbol(expresionA), Symbol(expresionS_)}));
 
   //  expresionS' → + expresionA expresionS' ∣ ϵ
-  grammar.addProd(18, Production(expresionS_, {t_mas, expresionA, expresionS_}));
+  grammar.addProd(18, Production(Symbol(expresionS_), {Symbol(t_mas), Symbol(expresionA), Symbol(expresionS_)}));
   //  Produccion epsilon
-  grammar.addProd(19, Production(expresionS_, {strEmpty}));
+  grammar.addProd(19, Production(Symbol(expresionS_), {Symbol(strEmpty)}));
 
   //  expresionA → expresionB expresionA'
-  grammar.addProd(20, Production(expresionA, {expresionB, expresionA_}));
+  grammar.addProd(20, Production(Symbol(expresionA), {Symbol(expresionB), Symbol(expresionA_)}));
 
   //  expresionA' → - expresionB expresionA' ∣ ϵ
-  grammar.addProd(21, Production(expresionA_, {t_menos, expresionB, expresionA_}));
+  grammar.addProd(21, Production(Symbol(expresionA_), {Symbol(t_menos), Symbol(expresionB), Symbol(expresionA_)}));
   //  Produccion epsilon
-  grammar.addProd(22, Production(expresionA_, {strEmpty}));
+  grammar.addProd(22, Production(Symbol(expresionA_), {Symbol(strEmpty)}));
 
   //  expresionB → expresionC expresionB'
-  grammar.addProd(23, Production(expresionB, {expresionC, expresionB_}));
+  grammar.addProd(23, Production(Symbol(expresionB), {Symbol(expresionC), Symbol(expresionB_)}));
 
   //  expresionB' → * expresionC expresionB' ∣ ϵ
-  grammar.addProd(24, Production(expresionB_, {t_por, expresionC, expresionB_}));
+  grammar.addProd(24, Production(Symbol(expresionB_), {Symbol(t_por), Symbol(expresionC), Symbol(expresionB_)}));
   //  Produccion epsilon
-  grammar.addProd(25, Production(expresionB_, {strEmpty}));
+  grammar.addProd(25, Production(Symbol(expresionB_), {Symbol(strEmpty)}));
 
   //  expresionC → expresionD expresionC'
-  grammar.addProd(26, Production(expresionC, {expresionD, expresionC_}));
+  grammar.addProd(26, Production(Symbol(expresionC), {Symbol(expresionD), Symbol(expresionC_)}));
 
   //  expresionC' → / expresionD expresionC' ∣ ϵ
-  grammar.addProd(27, Production(expresionC_, {t_div, expresionD, expresionC_}));
+  grammar.addProd(27, Production(Symbol(expresionC_), {Symbol(t_div), Symbol(expresionD), Symbol(expresionC_)}));
   //  Produccion epsilon
-  grammar.addProd(28, Production(expresionC_, {strEmpty}));
+  grammar.addProd(28, Production(Symbol(expresionC_), {Symbol(strEmpty)}));
 
   //  expresionD → ( expresionS ) ∣ identificador ∣ numero
-   grammar.addProd(29, Production(expresionD, {t_lpar, expresionS, t_rpar}));
-   grammar.addProd(30, Production(expresionD, {t_id}));
-   grammar.addProd(31, Production(expresionD, {t_numero}));
+   grammar.addProd(29, Production(Symbol(expresionD), {Symbol(t_lpar), Symbol(expresionS), Symbol(t_rpar)}));
+   grammar.addProd(30, Production(Symbol(expresionD), {Symbol(t_id)}));
+   grammar.addProd(31, Production(Symbol(expresionD), {Symbol(t_numero)}));
 }
 
 void ParserLL::loadTable()
@@ -260,9 +260,9 @@ int ParserLL::parse()
   // Declaramos los nombres de tokens y no terminales solo para mas legibilidad
   string tokensNames[] = {"$", "+", "-", "*", "/", "=", "(", ")", ",", ";", "ID", "if", "int", 
     "while", "else", "float", "numero"};
-  string noTermsNames[] = {"ε", "programa", "declaraciones", "declaraciones'", "declaracion", "tipo", 
-    "lista_var", "lista_var'", "sentencias", "sentencias'", "sentencia", "expresion", "expresionS'", 
-    "expresionA", "expresionA'", "expresionB", "expresionB'", "expresionC", "expresionC'", "expresionD"};
+  string noTermsNames[] = {"ε", "programa", "declaraciones", "declaracionesPrima", "declaracion", "tipo", 
+    "lista_var", "lista_varPrima", "sentencias", "sentencias'", "sentencia", "expresion", "expresionSPrima", 
+    "expresionA", "expresionAPrima", "expresionB", "expresionBPrima", "expresionC", "expresionCPrima", "expresionD"};
 
   //Auxiliares
   stack<Symbol> pila;    
@@ -279,46 +279,52 @@ int ParserLL::parse()
   pila.push(Symbol(programa)); // Metemos la produccion inicial de la gramatica
   cout << "Se metió '" << noTermsNames[programa] << "' a la pila" << endl;
   token = eat(); // Comemos un token antes de empezar
-  cout << "Se leyó '" << tokensNames[token] << "' como el primer token " << endl;
+  cout << "Se leyó el token " << tokensNames[token] << " como el primer token del archivo" << endl;
+
   // Realmente no hace mucha diferencia si iteramos así o mientras el token no sea eof
-  while(!pila.empty()) {
+  while(token != t_eof) {
     X = pila.top();
-    if(X.getType() == terminal)
-      cout << "Se encontró '" << tokensNames[X.getToken()] << "' en el tope de la pila" << endl;
-    else 
-      cout << "Se encontró '" << noTermsNames[X.getNoTerm()] << "' en el tope de la pila" << endl;
     if(X.getType() == terminal){ // el token es terminal
+      cout << "Se encontró el token '" << tokensNames[X.getToken()] << "' en el tope de la pila" << endl;
       if(X.getToken() == token){ // si X == p
         cout << "Se quitó el token '" << tokensNames[X.getToken()] << "' de la pila" << endl;
         pila.pop(); // Quitamos uno de la pila
+        Token tokenAnterior = token;
         token = eat(); // Avanzamos al siguiente token
-        cout << "Se comió el token '" << tokensNames[token] << "' del archivo" << endl;
+        cout << "Se pasó del token '" << tokensNames[tokenAnterior] << "' al token '" << tokensNames[token] << "'" << endl;
       }else {
         error("Se esperaba el token '" + tokensNames[X.getToken()] + "'"); 
         return -1;
       }
     } else { // Para los no terminales
+      cout << "Se encontró '" << noTermsNames[X.getNoTerm()] << "' en el tope de la pila" << endl;
       // Verificamos en la tabla de analisis sintactico
       // Iteramos sobre la fila de la tabla con la el encabeza X
       auto itFila = table.find(X.getNoTerm());
       cout << "Se buscará el no terminal '" << noTermsNames[X.getNoTerm()] << "' en la tabla" << endl;
       if(itFila != table.end()) {
+        cout << "Se encontró el no terminal '" << noTermsNames[X.getNoTerm()] << "' en la tabla" << endl;
         // Buscamos las columnas hasta encontrar el token actual
         auto itColum = itFila->second.find(token);
-        cout << "Se buscará el token '" << tokensNames[token] << "' en la fila de " << noTermsNames[X.getNoTerm()] << endl;
+        cout << "Se buscará el token '" << tokensNames[token] << "' en la fila de '" << noTermsNames[X.getNoTerm() ] << "'" << endl;
         if(itColum != itFila->second.end()) { // Encontramos la produccion en la tabla
           int numeroProduccion = itColum->second;
-          pila.pop();
+          cout << "Se encontró el número de producción '" << numeroProduccion << "' en tabla[" << X.getNoTerm() << "][" << token << "]" << endl;
+          pila.pop(); // Reemplazamos la producción
           cout << "Se quitó la producción '" << noTermsNames[X.getNoTerm()] << "' de la pila" << endl;
           Production prod = grammar.getProd(numeroProduccion); // obtenemos el numero de produccion que definimos
-          vector<int> cuerpoProd = prod.getBody();
+          vector<Symbol> cuerpoProd = prod.getBody();
           // Iteramos de manera reversa sobre la produccion
           for(auto revIt = cuerpoProd.rbegin(); revIt != cuerpoProd.rend(); revIt++){
-            Symbol prodSym = grammar.getSym(*revIt);
-            if(!(prodSym.getType() == terminal && prodSym.getNoTerm() == strEmpty)){ // Ignoramos producciones epsilon
+            Symbol prodSym = *revIt;
+            if(!(prodSym.getType() == nonterminal && prodSym.getNoTerm() == strEmpty)){ // Ignoramos producciones epsilon
               pila.push(prodSym);
-              cout << "Se metió la producción '" << noTermsNames[prodSym.getNoTerm()] << "' a la pila" << endl;
-            }
+              if(prodSym.getType() == terminal)
+                cout << "Se metió el token '" << tokensNames[prodSym.getToken()] << "' a la pila" << endl;
+              else
+                cout << "Se metió la producción '" << noTermsNames[prodSym.getNoTerm()] << "' a la pila" << endl;
+            } else 
+              cout << "Producción corresponde a producción epsilon, omitiendo" << endl;
           }
         } else { // No se encontró el terminal en la fila
           error("El token '" + tokensNames[token] + "' no está considerado en la fila de '" + noTermsNames[X.getNoTerm()] + "'");
@@ -332,13 +338,9 @@ int ParserLL::parse()
 
     }
   }
-  if(token == t_eof) {
-    aceptar("Cadena aceptada");
-    return 0;
-  } else {
-    error("La cadena no está bien formada");
-    return -1;
-  }
+  cout << "El token actual es " << tokensNames[0] << endl;
+  aceptar("La cadena está bien formada");
+  return 0;
 }
 
 void ParserLL::error(string msg)

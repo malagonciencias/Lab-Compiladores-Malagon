@@ -4,7 +4,7 @@ Production::Production()
 {    
 }
 
-Production::Production(int head, vector<int> body)
+Production::Production(Symbol head, vector<Symbol> body)
 {
     this->head = head;
     this->body = body;
@@ -14,11 +14,11 @@ Production::~Production(){
 
 }
 
-int Production::getHead()
+Symbol Production::getHead()
 {
     return head;
 }
 
-vector<int> Production::getBody(){
+vector<Symbol> Production::getBody(){
     return body;
 }

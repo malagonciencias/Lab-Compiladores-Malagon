@@ -1,0 +1,5 @@
+string hola, mundo;
+hola = "hola";
+mundo = "mundo";
+
+string holamundo = hola + mundo;

@@ -1,0 +1,5 @@
+float hola, mundo;
+hola = 2;
+mundo = 1;
+
+while (hola + mundo) id = 3;
