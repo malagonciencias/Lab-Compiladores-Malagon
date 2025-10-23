@@ -3,7 +3,7 @@ CXXDEBUG = -g -Wall
 CXXSTD=-std=c++17
 CXXFLAGS= -Wno-deprecated-register -O0 $(CXXSTD) $(CXXDEBUG)
 
-EXE=comp
+EXE=compiler
 
 CPPOBJ = Grammar ParserLL main Production Symbol
 FILES=$(addsuffix .cpp, $(CPPOBJ))
