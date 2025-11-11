@@ -315,10 +315,11 @@ namespace calc {
 	
 	
 ### Ejercicios
-1. Modificar el código fuente para que la calculadora pueda operar con flotantes, no solamente enteros. 
+1. Modificar el código fuente para que la calculadora pueda operar con flotantes, no solamente enteros.
 2. Modificar el código fuente para que la calculadora pueda reconocer más líneas con expresiones en el archivo de entrada.
 3. Modificar el código fuente para que la calculadora pueda operar con restas y divisiones.
-4. Modificar el código fuente para que la calculadora admita números negativos.
+4. Modificar el código fuente para que la calculadora admita números negativos.\
+  Se realizaron todos los cambios en los archivos __lexer.ll__ y __calculadora.yy__, también se cambiaron los tests y funcionan correctamente.
 
 #### Para la gramática G = ( N, Σ, P, S), descrita por las siguientes producciones: 
 > P = {

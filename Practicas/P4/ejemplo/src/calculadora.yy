@@ -30,14 +30,17 @@ using namespace std;
 
 %union {
   struct { //declarado para manejar los tipos de número posibles: 1.- entero, 2.- flotante.
-    int ival; //valor 
+    float ival; //valor 
     int tipo;
   } numero;
 }
 
 %token<numero> NUM
+%token NLINE
 
 %left MAS
+%left MENOS
+%left DIV
 %left MUL
 
 %nonassoc PARIZQ
@@ -46,13 +49,20 @@ using namespace std;
 %type<numero> expresion
 
 %start line
+      
 
 %%
 
 line: expresion { cout << "Análisis léxico y sintáctico terminado.\nEl valor de la expresión ya evaluada es: " << $1.ival << endl; };
+        | line NLINE expresion { cout << "Análisis léxico y sintáctico terminado para una expresión.\nEl valor de la expresión evaluada es: " << $3.ival << endl; }; // expresiones separadas por ENTER
 
 expresion : expresion MAS expresion { $$.ival = $1.ival + $3.ival; };
-	  | expresion MUL expresion { $$.ival = $1.ival * $3.ival; };
+      | expresion MAS MENOS expresion {$$.ival = $1.ival - $4.ival; }; // El caso para - menos es complicado, entonces decidi manejarlo asi
+      | expresion MENOS expresion { $$.ival = $1.ival - $3.ival; };
+      | expresion DIV expresion { $$.ival = $1.ival / $3.ival; };
+      | expresion DIV MENOS expresion { $$.ival = $1.ival / -$4.ival; };
+      | expresion MUL expresion { $$.ival = $1.ival * $3.ival; };
+	  | expresion MUL MENOS expresion { $$.ival = $1.ival * -$4.ival; };
 	  | PARIZQ expresion PARDER { $$ = $2; };
 	  | NUM { $$ = $1; };
 
