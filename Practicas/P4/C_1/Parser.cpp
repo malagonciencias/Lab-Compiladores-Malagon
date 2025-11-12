@@ -37,7 +37,7 @@
 
 
 // First part of user prologue.
-#line 1 "calculadora.yy"
+#line 1 "programa.yy"
 
 #include <iostream>
 #include <fstream>
@@ -52,7 +52,7 @@ using namespace std;
 
 
 // Unqualified %code blocks.
-#line 26 "calculadora.yy"
+#line 27 "programa.yy"
 
  #include "Lexer.hpp"
  #define yylex(x) lexer->lex(x) // Referencia a 1 en Lexer.hpp
@@ -129,8 +129,8 @@ using namespace std;
 #define YYERROR         goto yyerrorlab
 #define YYRECOVERING()  (!!yyerrstatus_)
 
-#line 15 "calculadora.yy"
-namespace calc {
+#line 15 "programa.yy"
+namespace prog {
 #line 135 "Parser.cpp"
 
   /// Build a parser object.
@@ -585,80 +585,134 @@ namespace calc {
         {
           switch (yyn)
             {
-  case 2: // line: expresion
-#line 56 "calculadora.yy"
-                { cout << "Análisis léxico y sintáctico terminado.\nEl valor de la expresión ya evaluada es: " << (yystack_[0].value.numero).ival << endl; }
+  case 2: // programa: declaraciones sentencias
+#line 80 "programa.yy"
+                                   { cout << "Análisis léxico y sintáctico terminado. La expresión pertenece a la grámatica" << endl; }
 #line 592 "Parser.cpp"
     break;
 
-  case 3: // line: line NLINE expresion
-#line 57 "calculadora.yy"
-                               { cout << "Análisis léxico y sintáctico terminado para una expresión.\nEl valor de la expresión evaluada es: " << (yystack_[0].value.numero).ival << endl; }
+  case 3: // declaraciones: declaraciones declaracion
+#line 83 "programa.yy"
+                                         { cout << "Se leyó una producción: 'declaraciones -> declaraciones declaracion' " << endl; }
 #line 598 "Parser.cpp"
     break;
 
-  case 4: // expresion: expresion MAS expresion
-#line 59 "calculadora.yy"
-                                    { (yylhs.value.numero).ival = (yystack_[2].value.numero).ival + (yystack_[0].value.numero).ival; }
+  case 4: // declaraciones: declaracion
+#line 84 "programa.yy"
+                           { cout << "Se leyó una producción: 'declaraciones -> declaracion' " << endl; }
 #line 604 "Parser.cpp"
     break;
 
-  case 5: // expresion: expresion MAS MENOS expresion
-#line 60 "calculadora.yy"
-                                      {(yylhs.value.numero).ival = (yystack_[3].value.numero).ival - (yystack_[0].value.numero).ival; }
+  case 5: // declaracion: tipo lista_var PYC
+#line 87 "programa.yy"
+                                { cout << "Se leyó una producción: 'declaracion -> tipo lista-var' " << endl; }
 #line 610 "Parser.cpp"
     break;
 
-  case 6: // expresion: expresion MENOS expresion
-#line 61 "calculadora.yy"
-                                  { (yylhs.value.numero).ival = (yystack_[2].value.numero).ival - (yystack_[0].value.numero).ival; }
+  case 6: // tipo: INT
+#line 90 "programa.yy"
+          { cout << "Se leyó una producción: 'tipo -> INT'" << endl; }
 #line 616 "Parser.cpp"
     break;
 
-  case 7: // expresion: expresion MENOS MENOS expresion
-#line 62 "calculadora.yy"
-                                        { (yylhs.value.numero).ival = (yystack_[3].value.numero).ival - -(yystack_[0].value.numero).ival; }
+  case 7: // tipo: FLOAT
+#line 91 "programa.yy"
+            { cout << "Se leyó una producción: 'tipo -> FLOAT'" << endl; }
 #line 622 "Parser.cpp"
     break;
 
-  case 8: // expresion: expresion DIV expresion
-#line 63 "calculadora.yy"
-                                { (yylhs.value.numero).ival = (yystack_[2].value.numero).ival / (yystack_[0].value.numero).ival; }
+  case 8: // lista_var: lista_var COMA ID
+#line 94 "programa.yy"
+                             { cout << "Se leyó una producción: 'lista_var -> lista-var, ID'" << endl; }
 #line 628 "Parser.cpp"
     break;
 
-  case 9: // expresion: expresion DIV MENOS expresion
-#line 64 "calculadora.yy"
-                                      { (yylhs.value.numero).ival = (yystack_[3].value.numero).ival / -(yystack_[0].value.numero).ival; }
+  case 9: // lista_var: ID
+#line 95 "programa.yy"
+              { cout << "Se leyó una producción: 'lista_var -> ID'" << endl; }
 #line 634 "Parser.cpp"
     break;
 
-  case 10: // expresion: expresion MUL expresion
-#line 65 "calculadora.yy"
-                                { (yylhs.value.numero).ival = (yystack_[2].value.numero).ival * (yystack_[0].value.numero).ival; }
+  case 10: // sentencias: sentencias sentencia
+#line 98 "programa.yy"
+                                 { cout << "Se leyó una producción: 'SENTENCIAS -> SENTENCIAS SENTENCIA'" << endl; }
 #line 640 "Parser.cpp"
     break;
 
-  case 11: // expresion: expresion MUL MENOS expresion
-#line 66 "calculadora.yy"
-                                          { (yylhs.value.numero).ival = (yystack_[3].value.numero).ival * -(yystack_[0].value.numero).ival; }
+  case 11: // sentencias: sentencia
+#line 99 "programa.yy"
+                      { cout << "Se leyó una producción: 'SENTENCIAS -> SENTENCIA'" << endl; }
 #line 646 "Parser.cpp"
     break;
 
-  case 12: // expresion: PARIZQ expresion PARDER
-#line 67 "calculadora.yy"
-                                    { (yylhs.value.numero) = (yystack_[1].value.numero); }
+  case 12: // sentencia: ID ASIG expresion PYC
+#line 103 "programa.yy"
+                                 { cout << "Se leyó una producción: 'sentencia -> ID = expresion;'" << endl; }
 #line 652 "Parser.cpp"
     break;
 
-  case 13: // expresion: NUM
-#line 68 "calculadora.yy"
-                { (yylhs.value.numero) = (yystack_[0].value.numero); }
+  case 13: // sentencia: IF LPAR expresion RPAR LBRAC sentencias RBRAC ELSE LBRAC sentencias RBRAC
+#line 104 "programa.yy"
+                                                                                     { cout << "Se leyó una producción: 'sentencia -> IF ( expresion ) { sentencias } ELSE { sentencias }'" << endl; }
 #line 658 "Parser.cpp"
     break;
 
+  case 14: // sentencia: WHILE LPAR expresion RPAR LBRAC sentencias RBRAC
+#line 105 "programa.yy"
+                                                            { cout << "Se leyó una producción: 'sentencia -> WHILE ( expresion ) { sentencias }'" << endl; }
+#line 664 "Parser.cpp"
+    break;
 
-#line 662 "Parser.cpp"
+  case 15: // expresion: expresion MAS expresion
+#line 109 "programa.yy"
+                                   { cout << "Se leyó una producción: 'expresion -> expresion + expresion'" << endl; }
+#line 670 "Parser.cpp"
+    break;
+
+  case 16: // expresion: expresion MENOS expresion
+#line 110 "programa.yy"
+                                     { cout << "Se leyó una producción: 'expresion -> expresion - expresion'" << endl; }
+#line 676 "Parser.cpp"
+    break;
+
+  case 17: // expresion: expresion MULT expresion
+#line 111 "programa.yy"
+                                    { cout << "Se leyó una producción: 'expresion -> expresion *expresion'" << endl; }
+#line 682 "Parser.cpp"
+    break;
+
+  case 18: // expresion: expresion DIV expresion
+#line 112 "programa.yy"
+                                   { cout << "Se leyó una producción: 'expresion -> expresion / expresion'" << endl; }
+#line 688 "Parser.cpp"
+    break;
+
+  case 19: // expresion: ID
+#line 113 "programa.yy"
+              { cout << "Se encontró un ID: " << *(yystack_[0].value.id) << endl; }
+#line 694 "Parser.cpp"
+    break;
+
+  case 20: // expresion: NUM
+#line 114 "programa.yy"
+               { cout << "Se leyó un número: " << (yystack_[0].value.numero).ival << endl; }
+#line 700 "Parser.cpp"
+    break;
+
+  case 21: // expresion: LPAR expresion RPAR
+#line 115 "programa.yy"
+                               { cout << "Se leyó una producción: 'expresion -> ( expresion )'" << endl; }
+#line 706 "Parser.cpp"
+    break;
+
+  case 22: // expresion: MENOS expresion
+#line 117 "programa.yy"
+                           { cout << "Se leyó una producción: 'expresion -> -expresion'" << endl; }
+#line 712 "Parser.cpp"
+    break;
+
+
+#line 716 "Parser.cpp"
 
             default:
               break;
@@ -690,7 +744,8 @@ namespace calc {
     if (!yyerrstatus_)
       {
         ++yynerrs_;
-        std::string msg = YY_("syntax error");
+        context yyctx (*this, yyla);
+        std::string msg = yysyntax_error_ (yyctx);
         error (YY_MOVE (msg));
       }
 
@@ -831,106 +886,283 @@ namespace calc {
     error (yyexc.what ());
   }
 
-#if YYDEBUG || 0
-  const char *
+  /* Return YYSTR after stripping away unnecessary quotes and
+     backslashes, so that it's suitable for yyerror.  The heuristic is
+     that double-quoting is unnecessary unless the string contains an
+     apostrophe, a comma, or backslash (other than backslash-backslash).
+     YYSTR is taken from yytname.  */
+  std::string
+  Parser::yytnamerr_ (const char *yystr)
+  {
+    if (*yystr == '"')
+      {
+        std::string yyr;
+        char const *yyp = yystr;
+
+        for (;;)
+          switch (*++yyp)
+            {
+            case '\'':
+            case ',':
+              goto do_not_strip_quotes;
+
+            case '\\':
+              if (*++yyp != '\\')
+                goto do_not_strip_quotes;
+              else
+                goto append;
+
+            append:
+            default:
+              yyr += *yyp;
+              break;
+
+            case '"':
+              return yyr;
+            }
+      do_not_strip_quotes: ;
+      }
+
+    return yystr;
+  }
+
+  std::string
   Parser::symbol_name (symbol_kind_type yysymbol)
   {
-    return yytname_[yysymbol];
+    return yytnamerr_ (yytname_[yysymbol]);
   }
-#endif // #if YYDEBUG || 0
+
+
+
+  // Parser::context.
+  Parser::context::context (const Parser& yyparser, const symbol_type& yyla)
+    : yyparser_ (yyparser)
+    , yyla_ (yyla)
+  {}
+
+  int
+  Parser::context::expected_tokens (symbol_kind_type yyarg[], int yyargn) const
+  {
+    // Actual number of expected tokens
+    int yycount = 0;
+
+    const int yyn = yypact_[+yyparser_.yystack_[0].state];
+    if (!yy_pact_value_is_default_ (yyn))
+      {
+        /* Start YYX at -YYN if negative to avoid negative indexes in
+           YYCHECK.  In other words, skip the first -YYN actions for
+           this state because they are default actions.  */
+        const int yyxbegin = yyn < 0 ? -yyn : 0;
+        // Stay within bounds of both yycheck and yytname.
+        const int yychecklim = yylast_ - yyn + 1;
+        const int yyxend = yychecklim < YYNTOKENS ? yychecklim : YYNTOKENS;
+        for (int yyx = yyxbegin; yyx < yyxend; ++yyx)
+          if (yycheck_[yyx + yyn] == yyx && yyx != symbol_kind::S_YYerror
+              && !yy_table_value_is_error_ (yytable_[yyx + yyn]))
+            {
+              if (!yyarg)
+                ++yycount;
+              else if (yycount == yyargn)
+                return 0;
+              else
+                yyarg[yycount++] = YY_CAST (symbol_kind_type, yyx);
+            }
+      }
+
+    if (yyarg && yycount == 0 && 0 < yyargn)
+      yyarg[0] = symbol_kind::S_YYEMPTY;
+    return yycount;
+  }
 
 
 
 
 
 
+  int
+  Parser::yy_syntax_error_arguments_ (const context& yyctx,
+                                                 symbol_kind_type yyarg[], int yyargn) const
+  {
+    /* There are many possibilities here to consider:
+       - If this state is a consistent state with a default action, then
+         the only way this function was invoked is if the default action
+         is an error action.  In that case, don't check for expected
+         tokens because there are none.
+       - The only way there can be no lookahead present (in yyla) is
+         if this state is a consistent state with a default action.
+         Thus, detecting the absence of a lookahead is sufficient to
+         determine that there is no unexpected or expected token to
+         report.  In that case, just report a simple "syntax error".
+       - Don't assume there isn't a lookahead just because this state is
+         a consistent state with a default action.  There might have
+         been a previous inconsistent state, consistent state with a
+         non-default action, or user semantic action that manipulated
+         yyla.  (However, yyla is currently not documented for users.)
+       - Of course, the expected token list depends on states to have
+         correct lookahead information, and it depends on the parser not
+         to perform extra reductions after fetching a lookahead from the
+         scanner and before detecting a syntax error.  Thus, state merging
+         (from LALR or IELR) and default reductions corrupt the expected
+         token list.  However, the list is correct for canonical LR with
+         one exception: it will still contain any token that will not be
+         accepted due to an error action in a later state.
+    */
+
+    if (!yyctx.lookahead ().empty ())
+      {
+        if (yyarg)
+          yyarg[0] = yyctx.token ();
+        int yyn = yyctx.expected_tokens (yyarg ? yyarg + 1 : yyarg, yyargn - 1);
+        return yyn + 1;
+      }
+    return 0;
+  }
+
+  // Generate an error message.
+  std::string
+  Parser::yysyntax_error_ (const context& yyctx) const
+  {
+    // Its maximum.
+    enum { YYARGS_MAX = 5 };
+    // Arguments of yyformat.
+    symbol_kind_type yyarg[YYARGS_MAX];
+    int yycount = yy_syntax_error_arguments_ (yyctx, yyarg, YYARGS_MAX);
+
+    char const* yyformat = YY_NULLPTR;
+    switch (yycount)
+      {
+#define YYCASE_(N, S)                         \
+        case N:                               \
+          yyformat = S;                       \
+        break
+      default: // Avoid compiler warnings.
+        YYCASE_ (0, YY_("syntax error"));
+        YYCASE_ (1, YY_("syntax error, unexpected %s"));
+        YYCASE_ (2, YY_("syntax error, unexpected %s, expecting %s"));
+        YYCASE_ (3, YY_("syntax error, unexpected %s, expecting %s or %s"));
+        YYCASE_ (4, YY_("syntax error, unexpected %s, expecting %s or %s or %s"));
+        YYCASE_ (5, YY_("syntax error, unexpected %s, expecting %s or %s or %s or %s"));
+#undef YYCASE_
+      }
+
+    std::string yyres;
+    // Argument number.
+    std::ptrdiff_t yyi = 0;
+    for (char const* yyp = yyformat; *yyp; ++yyp)
+      if (yyp[0] == '%' && yyp[1] == 's' && yyi < yycount)
+        {
+          yyres += symbol_name (yyarg[yyi++]);
+          ++yyp;
+        }
+      else
+        yyres += *yyp;
+    return yyres;
+  }
 
 
-
-  const signed char Parser::yypact_ninf_ = -6;
+  const signed char Parser::yypact_ninf_ = -41;
 
   const signed char Parser::yytable_ninf_ = -1;
 
   const signed char
   Parser::yypact_[] =
   {
-       1,    -6,     1,    11,    34,    28,    -6,     1,    14,    16,
-      18,    23,    -6,    34,     1,    -5,     1,    36,     1,     5,
-       1,    -6,    36,    36,    36,    36
+      -6,   -41,   -41,    12,    41,   -41,    19,   -41,    16,     8,
+      33,   -41,    59,   -41,   -41,    50,    27,    27,    27,   -41,
+     -41,    25,   -41,   -41,    27,    27,    53,    31,    36,   -41,
+      64,    42,    27,    27,    27,    27,   -41,    48,    55,   -41,
+      58,    64,    66,   -41,    59,    59,    -1,     6,    62,   -41,
+      57,    59,    10,   -41
   };
 
   const signed char
   Parser::yydefact_[] =
   {
-       0,    13,     0,     0,     2,     0,     1,     0,     0,     0,
-       0,     0,    12,     3,     0,     4,     0,     6,     0,     8,
-       0,    10,     5,     7,     9,    11
+       0,     6,     7,     0,     0,     4,     0,     1,     0,     0,
+       0,     3,     2,    11,     9,     0,     0,     0,     0,    10,
+       5,     0,    20,    19,     0,     0,     0,     0,     0,     8,
+      22,     0,     0,     0,     0,     0,    12,     0,     0,    21,
+      15,    16,    17,    18,     0,     0,     0,     0,     0,    14,
+       0,     0,     0,    13
   };
 
   const signed char
   Parser::yypgoto_[] =
   {
-      -6,    -6,    -2
+     -41,   -41,   -41,    75,   -41,   -41,   -40,   -12,   -16
   };
 
   const signed char
   Parser::yydefgoto_[] =
   {
-       0,     3,     4
+       0,     3,     4,     5,     6,    15,    12,    13,    26
   };
 
   const signed char
   Parser::yytable_[] =
   {
-       5,     9,    10,    11,     1,    13,    15,    17,    19,    21,
-       2,     6,    22,    11,    23,     7,    24,     1,    25,     1,
-      14,     1,    16,     2,    18,     2,     1,     2,     0,    20,
-       0,     0,     2,     8,     9,    10,    11,     0,    12,     8,
-       9,    10,    11,    10,    11
+      19,    27,    28,     8,    46,    47,     1,     2,    30,    31,
+       8,    52,     7,     9,     8,    10,    40,    41,    42,    43,
+       9,    48,    10,    14,     9,    16,    10,    17,    49,    29,
+      22,    23,    53,    24,    19,    19,    32,    33,    34,    35,
+      19,    32,    33,    34,    35,     8,    25,    32,    33,    34,
+      35,    37,    18,     1,     2,     9,    38,    10,    32,    33,
+      34,    35,    39,     8,    33,    34,    35,    20,    21,    44,
+      36,    34,    35,     9,    35,    10,    45,    50,    51,    11
   };
 
   const signed char
   Parser::yycheck_[] =
   {
-       2,     6,     7,     8,     3,     7,     8,     9,    10,    11,
-       9,     0,    14,     8,    16,     4,    18,     3,    20,     3,
-       6,     3,     6,     9,     6,     9,     3,     9,    -1,     6,
-      -1,    -1,     9,     5,     6,     7,     8,    -1,    10,     5,
-       6,     7,     8,     7,     8
+      12,    17,    18,     4,    44,    45,    12,    13,    24,    25,
+       4,    51,     0,    14,     4,    16,    32,    33,    34,    35,
+      14,    22,    16,     4,    14,     9,    16,    19,    22,     4,
+       3,     4,    22,     6,    46,    47,     5,     6,     7,     8,
+      52,     5,     6,     7,     8,     4,    19,     5,     6,     7,
+       8,    20,    19,    12,    13,    14,    20,    16,     5,     6,
+       7,     8,    20,     4,     6,     7,     8,    17,    18,    21,
+      17,     7,     8,    14,     8,    16,    21,    15,    21,     4
   };
 
   const signed char
   Parser::yystos_[] =
   {
-       0,     3,     9,    12,    13,    13,     0,     4,     5,     6,
-       7,     8,    10,    13,     6,    13,     6,    13,     6,    13,
-       6,    13,    13,    13,    13,    13
+       0,    12,    13,    24,    25,    26,    27,     0,     4,    14,
+      16,    26,    29,    30,     4,    28,     9,    19,    19,    30,
+      17,    18,     3,     4,     6,    19,    31,    31,    31,     4,
+      31,    31,     5,     6,     7,     8,    17,    20,    20,    20,
+      31,    31,    31,    31,    21,    21,    29,    29,    22,    22,
+      15,    21,    29,    22
   };
 
   const signed char
   Parser::yyr1_[] =
   {
-       0,    11,    12,    12,    13,    13,    13,    13,    13,    13,
-      13,    13,    13,    13
+       0,    23,    24,    25,    25,    26,    27,    27,    28,    28,
+      29,    29,    30,    30,    30,    31,    31,    31,    31,    31,
+      31,    31,    31
   };
 
   const signed char
   Parser::yyr2_[] =
   {
-       0,     2,     1,     3,     3,     4,     3,     4,     3,     4,
-       3,     4,     3,     1
+       0,     2,     2,     2,     1,     3,     1,     1,     3,     1,
+       2,     1,     4,    11,     7,     3,     3,     3,     3,     1,
+       1,     3,     2
   };
 
 
-#if YYDEBUG
+#if YYDEBUG || 1
   // YYTNAME[SYMBOL-NUM] -- String name of the symbol SYMBOL-NUM.
   // First, the terminals, then, starting at \a YYNTOKENS, nonterminals.
   const char*
   const Parser::yytname_[] =
   {
-  "\"end of file\"", "error", "\"invalid token\"", "NUM", "NLINE", "MAS",
-  "MENOS", "DIV", "MUL", "PARIZQ", "PARDER", "$accept", "line",
-  "expresion", YY_NULLPTR
+  "\"end of file\"", "error", "\"invalid token\"", "NUM", "ID", "MAS",
+  "MENOS", "MULT", "DIV", "ASIG", "PARIZQ", "PARDER", "INT", "FLOAT", "IF",
+  "ELSE", "WHILE", "PYC", "COMA", "LPAR", "RPAR", "LBRAC", "RBRAC",
+  "$accept", "programa", "declaraciones", "declaracion", "tipo",
+  "lista_var", "sentencias", "sentencia", "expresion", YY_NULLPTR
   };
 #endif
 
@@ -939,8 +1171,9 @@ namespace calc {
   const signed char
   Parser::yyrline_[] =
   {
-       0,    56,    56,    57,    59,    60,    61,    62,    63,    64,
-      65,    66,    67,    68
+       0,    80,    80,    83,    84,    87,    90,    91,    94,    95,
+      98,    99,   103,   104,   105,   109,   110,   111,   112,   113,
+     114,   115,   117
   };
 
   void
@@ -1005,10 +1238,11 @@ namespace calc {
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
-       5,     6,     7,     8,     9,    10
+       5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
+      15,    16,    17,    18,    19,    20,    21,    22
     };
     // Last valid token kind.
-    const int code_max = 265;
+    const int code_max = 277;
 
     if (t <= 0)
       return symbol_kind::S_YYEOF;
@@ -1018,15 +1252,15 @@ namespace calc {
       return symbol_kind::S_YYUNDEF;
   }
 
-#line 15 "calculadora.yy"
-} // calc
-#line 1024 "Parser.cpp"
+#line 15 "programa.yy"
+} // prog
+#line 1258 "Parser.cpp"
 
-#line 70 "calculadora.yy"
+#line 119 "programa.yy"
 
 
-void calc::Parser::error(const std::string& msg) {
-    std::cerr << msg << '\n';
+void prog::Parser::error(const std::string& msg) {
+    std::cerr << "Error en la línea: " << lexer->lineno() << ": " << msg << std::endl;
 }
 
 
@@ -1042,14 +1276,14 @@ int main(int argc, char *argv[]){
     filebuf fb;
     fb.open(string(argv[1]), ios::in);
     istream in(&fb);
-    calc::Lexer lexer(&in);
-    calc::Parser parser(&lexer);
+    prog::Lexer lexer(&in);
+    prog::Parser parser(&lexer);
     parser.parse();
     fb.close();
     return 0;
     /*
-    calc::Lexer scanner{ std::cin, std::cerr };
-    calc::Parser parser{ &scanner };
+    prog::Lexer scanner{ std::cin, std::cerr };
+    prog::Parser parser{ &scanner };
     //std::cout.precision(10);
     parser.parse();*/
 }

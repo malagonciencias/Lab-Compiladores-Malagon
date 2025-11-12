@@ -33,7 +33,7 @@
 
 /**
  ** \file Parser.hpp
- ** Define the calc::parser class.
+ ** Define the prog::parser class.
  */
 
 // C++ LALR(1) parser skeleton written by Akim Demaille.
@@ -45,11 +45,11 @@
 #ifndef YY_YY_PARSER_HPP_INCLUDED
 # define YY_YY_PARSER_HPP_INCLUDED
 // "%code requires" blocks.
-#line 19 "calculadora.yy"
+#line 20 "programa.yy"
 
-    namespace calc {
+    namespace prog {
         class Lexer;
-    } // namespace calc
+    } // namespace prog
 
 #line 55 "Parser.hpp"
 
@@ -185,8 +185,8 @@
 # define YYDEBUG 0
 #endif
 
-#line 15 "calculadora.yy"
-namespace calc {
+#line 15 "programa.yy"
+namespace prog {
 #line 191 "Parser.hpp"
 
 
@@ -205,14 +205,16 @@ namespace calc {
     /// Symbol semantic values.
     union value_type
     {
-#line 31 "calculadora.yy"
+#line 32 "programa.yy"
 
   struct { //declarado para manejar los tipos de número posibles: 1.- entero, 2.- flotante.
     float ival; //valor 
     int tipo;
   } numero;
 
-#line 216 "Parser.hpp"
+    char *id; // nombre del id, no usamos estructura ya que solo es un campo
+
+#line 218 "Parser.hpp"
 
     };
 #endif
@@ -244,13 +246,25 @@ namespace calc {
     YYerror = 256,                 // error
     YYUNDEF = 257,                 // "invalid token"
     NUM = 258,                     // NUM
-    NLINE = 259,                   // NLINE
+    ID = 259,                      // ID
     MAS = 260,                     // MAS
     MENOS = 261,                   // MENOS
-    DIV = 262,                     // DIV
-    MUL = 263,                     // MUL
-    PARIZQ = 264,                  // PARIZQ
-    PARDER = 265                   // PARDER
+    MULT = 262,                    // MULT
+    DIV = 263,                     // DIV
+    ASIG = 264,                    // ASIG
+    PARIZQ = 265,                  // PARIZQ
+    PARDER = 266,                  // PARDER
+    INT = 267,                     // INT
+    FLOAT = 268,                   // FLOAT
+    IF = 269,                      // IF
+    ELSE = 270,                    // ELSE
+    WHILE = 271,                   // WHILE
+    PYC = 272,                     // PYC
+    COMA = 273,                    // COMA
+    LPAR = 274,                    // LPAR
+    RPAR = 275,                    // RPAR
+    LBRAC = 276,                   // LBRAC
+    RBRAC = 277                    // RBRAC
       };
       /// Backward compatibility alias (Bison 3.6).
       typedef token_kind_type yytokentype;
@@ -267,22 +281,40 @@ namespace calc {
     {
       enum symbol_kind_type
       {
-        YYNTOKENS = 11, ///< Number of tokens.
+        YYNTOKENS = 23, ///< Number of tokens.
         S_YYEMPTY = -2,
         S_YYEOF = 0,                             // "end of file"
         S_YYerror = 1,                           // error
         S_YYUNDEF = 2,                           // "invalid token"
         S_NUM = 3,                               // NUM
-        S_NLINE = 4,                             // NLINE
+        S_ID = 4,                                // ID
         S_MAS = 5,                               // MAS
         S_MENOS = 6,                             // MENOS
-        S_DIV = 7,                               // DIV
-        S_MUL = 8,                               // MUL
-        S_PARIZQ = 9,                            // PARIZQ
-        S_PARDER = 10,                           // PARDER
-        S_YYACCEPT = 11,                         // $accept
-        S_line = 12,                             // line
-        S_expresion = 13                         // expresion
+        S_MULT = 7,                              // MULT
+        S_DIV = 8,                               // DIV
+        S_ASIG = 9,                              // ASIG
+        S_PARIZQ = 10,                           // PARIZQ
+        S_PARDER = 11,                           // PARDER
+        S_INT = 12,                              // INT
+        S_FLOAT = 13,                            // FLOAT
+        S_IF = 14,                               // IF
+        S_ELSE = 15,                             // ELSE
+        S_WHILE = 16,                            // WHILE
+        S_PYC = 17,                              // PYC
+        S_COMA = 18,                             // COMA
+        S_LPAR = 19,                             // LPAR
+        S_RPAR = 20,                             // RPAR
+        S_LBRAC = 21,                            // LBRAC
+        S_RBRAC = 22,                            // RBRAC
+        S_YYACCEPT = 23,                         // $accept
+        S_programa = 24,                         // programa
+        S_declaraciones = 25,                    // declaraciones
+        S_declaracion = 26,                      // declaracion
+        S_tipo = 27,                             // tipo
+        S_lista_var = 28,                        // lista_var
+        S_sentencias = 29,                       // sentencias
+        S_sentencia = 30,                        // sentencia
+        S_expresion = 31                         // expresion
       };
     };
 
@@ -340,14 +372,11 @@ namespace calc {
         Base::clear ();
       }
 
-#if YYDEBUG || 0
       /// The user-facing name of this symbol.
-      const char *name () const YY_NOEXCEPT
+      std::string name () const YY_NOEXCEPT
       {
         return Parser::symbol_name (this->kind ());
       }
-#endif // #if YYDEBUG || 0
-
 
       /// Backward compatibility (Bison 3.6).
       symbol_kind_type type_get () const YY_NOEXCEPT;
@@ -455,14 +484,27 @@ namespace calc {
     /// Report a syntax error.
     void error (const syntax_error& err);
 
-#if YYDEBUG || 0
     /// The user-facing name of the symbol whose (internal) number is
     /// YYSYMBOL.  No bounds checking.
-    static const char *symbol_name (symbol_kind_type yysymbol);
-#endif // #if YYDEBUG || 0
+    static std::string symbol_name (symbol_kind_type yysymbol);
 
 
 
+    class context
+    {
+    public:
+      context (const Parser& yyparser, const symbol_type& yyla);
+      const symbol_type& lookahead () const YY_NOEXCEPT { return yyla_; }
+      symbol_kind_type token () const YY_NOEXCEPT { return yyla_.kind (); }
+      /// Put in YYARG at most YYARGN of the expected tokens, and return the
+      /// number of tokens stored in YYARG.  If YYARG is null, return the
+      /// number of expected tokens (guaranteed to be less than YYNTOKENS).
+      int expected_tokens (symbol_kind_type yyarg[], int yyargn) const;
+
+    private:
+      const Parser& yyparser_;
+      const symbol_type& yyla_;
+    };
 
   private:
 #if YY_CPLUSPLUS < 201103L
@@ -476,6 +518,13 @@ namespace calc {
     /// Stored state numbers (used for stacks).
     typedef signed char state_type;
 
+    /// The arguments of the error message.
+    int yy_syntax_error_arguments_ (const context& yyctx,
+                                    symbol_kind_type yyarg[], int yyargn) const;
+
+    /// Generate an error message.
+    /// \param yyctx     the context in which the error occurred.
+    virtual std::string yysyntax_error_ (const context& yyctx) const;
     /// Compute post-reduction state.
     /// \param yystate   the current state
     /// \param yysym     the nonterminal to push on the stack
@@ -497,10 +546,11 @@ namespace calc {
     /// are valid, yet not members of the token_kind_type enum.
     static symbol_kind_type yytranslate_ (int t) YY_NOEXCEPT;
 
-#if YYDEBUG || 0
+    /// Convert the symbol name \a n to a form suitable for a diagnostic.
+    static std::string yytnamerr_ (const char *yystr);
+
     /// For a symbol, its name in clear.
     static const char* const yytname_[];
-#endif // #if YYDEBUG || 0
 
 
     // Tables.
@@ -766,9 +816,9 @@ namespace calc {
     /// Constants.
     enum
     {
-      yylast_ = 44,     ///< Last index in yytable_.
-      yynnts_ = 3,  ///< Number of nonterminal symbols.
-      yyfinal_ = 6 ///< Termination state number.
+      yylast_ = 79,     ///< Last index in yytable_.
+      yynnts_ = 9,  ///< Number of nonterminal symbols.
+      yyfinal_ = 7 ///< Termination state number.
     };
 
 
@@ -778,9 +828,9 @@ namespace calc {
   };
 
 
-#line 15 "calculadora.yy"
-} // calc
-#line 784 "Parser.hpp"
+#line 15 "programa.yy"
+} // prog
+#line 834 "Parser.hpp"
 
 
 

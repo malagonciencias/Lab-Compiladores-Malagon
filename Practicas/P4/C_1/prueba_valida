@@ -1,0 +1,8 @@
+float hola1, hola2;
+hola1 = 1/-5;
+if(1+2){
+    hola2 = hola1 * 8;
+}
+else{
+    hola2 = 1+1 - 1;
+}

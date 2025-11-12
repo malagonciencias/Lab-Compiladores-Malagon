@@ -59,6 +59,7 @@ line: expresion { cout << "Análisis léxico y sintáctico terminado.\nEl valor 
 expresion : expresion MAS expresion { $$.ival = $1.ival + $3.ival; };
       | expresion MAS MENOS expresion {$$.ival = $1.ival - $4.ival; }; // El caso para - menos es complicado, entonces decidi manejarlo asi
       | expresion MENOS expresion { $$.ival = $1.ival - $3.ival; };
+      | expresion MENOS MENOS expresion { $$.ival = $1.ival - -$4.ival; };
       | expresion DIV expresion { $$.ival = $1.ival / $3.ival; };
       | expresion DIV MENOS expresion { $$.ival = $1.ival / -$4.ival; };
       | expresion MUL expresion { $$.ival = $1.ival * $3.ival; };

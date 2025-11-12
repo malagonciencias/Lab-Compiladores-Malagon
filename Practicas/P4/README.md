@@ -349,13 +349,21 @@ namespace calc {
 
 #### Estructura del directorio
 ```c++
-p5
+p4
 ├── ejemplo
 │   └── src
 │       ├── calculadora.yy
 │       ├── Lexer.hpp
 │       ├── lexer.ll
 │       └── prueba
+├── C_1
+│   ├── programa.yy
+│   ├── Lexer.hpp
+│   ├── lexer.ll
+│   ├── prueba_valida
+│   ├── prueba_valida2
+│   ├── prueba_invalida
+│   └── prueba_invalida2
 └── README.md
 ```
 
