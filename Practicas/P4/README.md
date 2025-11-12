@@ -340,6 +340,7 @@ namespace calc {
     b. Escribir en un archivo de Bison la gramática definida. <br>
     c. Proponer un mensaje de error sintáctico más explícito. <br>
     d. Proponer archivos de prueba con derivaciones válidas. <br>
+    Implementados en la carpeta C_1, archivo ya compilado, para probar correr con `./programa <nombre_archivo>`
 	
 	
 #### Extras
